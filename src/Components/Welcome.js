@@ -15,14 +15,14 @@ const Welcome = () => {
 
   const handleExplore = () => {
     console.log("working here...........");
-    navigate("/Main");
+    navigate(`/SelectUseCase?email=${email}`);
   };
 
   useEffect(() => {
     const authenticated = isAuthenticated.isAuthenticated();
-    // if (!authenticated) {
-    //   navigate("/");
-    // }
+    if (!authenticated) {
+      navigate(`/`);
+    }
   });
 
   return (
