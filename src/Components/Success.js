@@ -37,9 +37,12 @@ const Success = () => {
           triggerEvent: "account-creation",
         }),
       });
-      //  console.log(await response.json())
+      const data = await response.json();
+      console.log(data)
+
       if (response.ok) {
-        navigate("/EmailVerify");
+        navigate(`/Welcome?email=${email}`);
+        localStorage.setItem('accessToken', data.data.token)
       } else {
         console.log(await response);
         setVerificationError("Incorrect verification code. Please try again.");
@@ -52,8 +55,6 @@ const Success = () => {
 
   const handleResendOtp = async (e) => {
     e.preventDefault();
-
-    console.log("working here..............");
     try {
       const response = await fetch(`${baseUrl}/auth/send-otp`, {
         method: "POST",
@@ -67,7 +68,6 @@ const Success = () => {
       });
 
       if (response.ok) {
-        // const data = await response.json();
         setSuccessMessage("Otp sent successfully");
         setVerificationError("");
       } else {
