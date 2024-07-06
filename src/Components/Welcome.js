@@ -15,14 +15,18 @@ const Welcome = () => {
 
   const handleExplore = () => {
     console.log("working here...........");
-    navigate("/");
+<<<<<<< HEAD
+    navigate("/Main");
+=======
+    navigate(`/SelectUseCase?email=${email}`);
+>>>>>>> origin/main
   };
 
   useEffect(() => {
     const authenticated = isAuthenticated.isAuthenticated();
-    // if (!authenticated) {
-    //   navigate("/");
-    // }
+    if (!authenticated) {
+      navigate(`/`);
+    }
   });
 
   return (
@@ -40,7 +44,7 @@ const Welcome = () => {
           <div className="gap-y-4">
             <p className="font-bold text-2xl py-4">Hey, {email} </p>
             <p className="py-4">
-              Congratulations! Your email has been successfully verified, Click the button below to sign in
+              Congratulations! Your email has been successfully verified
             </p>
 
             <div onClick={() => handleExplore()}>

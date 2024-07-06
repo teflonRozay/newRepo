@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import Button from "./Button";
 
 const PasswordUpdate = () => {
   const [password1, setPassword1] = useState("");
@@ -36,10 +37,12 @@ const PasswordUpdate = () => {
         }),
       });
 
+      const data = await response.json();
+      console.log("dataly........", data);
+
       if (response.ok) {
-        navigate("/PasswordCongrat"); // Navigate to the password updated page
+        navigate(`/PasswordCongrat?email=${data.data.email}`);
       } else {
-        const data = await response.json();
         setUpdateError(
           data.message || "Failed to update password. Please try again."
         );
@@ -54,34 +57,48 @@ const PasswordUpdate = () => {
 
   return (
     <div>
-      <h2>Update Password</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="password"> Password1:</label>
-          <input
-            type="password"
-            id="password1"
-            name="password2"
-            value={password1}
-            onChange={(e) => setPassword1(e.target.value)}
-            required
-          />
-        </div>
+      <div className="h-screen flex flex-col justify-center items-center border  mx-[20rem] bg-white">
+        <h2 className="font-bold text-3xl py-4">Update Password</h2>
+        <div className="gap-y-4 w-[40%]">
+          <form onSubmit={handleSubmit} className="flex flex-col">
+            <div className="flex flex-col">
+              <label htmlFor="password"> Password</label>
+              <input
+                type="password"
+                id="password1"
+                name="password2"
+                value={password1}
+                onChange={(e) => setPassword1(e.target.value)}
+                className="py-3"
+                required
+              />
+            </div>
 
-        <div>
-          <label htmlFor="password2"> Password2:</label>
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            value={password2}
-            onChange={(e) => setPassword2(e.target.value)}
-            required
-          />
+            <div className="flex flex-col py-3">
+              <label htmlFor="password2"> Confirm Password</label>
+              <input
+                type="password"
+                id="password2"
+                name="password2"
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
+                className="py-3"
+                required
+              />
+            </div>
+
+            <Button
+              type="submit"
+              className="bg-purple-900 px-2"
+              text="Save Password"
+            ></Button>
+            <p className=" text-center py-4">
+              This will be your new password to sign in to stridez
+            </p>
+          </form>
+          {updateError && <p style={{ color: "red" }}>{updateError}</p>}
         </div>
-        <button type="submit">Update Password</button>
-      </form>
-      {updateError && <p style={{ color: "red" }}>{updateError}</p>}
+      </div>
     </div>
   );
 };

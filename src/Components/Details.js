@@ -6,6 +6,8 @@ import ForgotPassword from './ForgotPassword.js';
 import Success from './Success.js';
 import Main from './Main.js';
 import EmailVerify from './EmailVerify.js';
+import SelectUseCase from './SelectUseCase.js';
+
 
 import Welcome from './Welcome.js';
 import ResetPassword from './ResetPassword.js';
@@ -40,6 +42,8 @@ const Details = () => {
         <Route path='/ResetPassword' element={<ResetPassword/>} />
         <Route path='/PasswordUpdate/:tempToken' element={<PasswordUpdate/>} />
         <Route path='/PasswordCongrat' element={<PasswordCongrat/>} />
+        <Route path='/SelectUseCase' element={<SelectUseCase/>} />
+
       </Routes>
     </Router>
   );
