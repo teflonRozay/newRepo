@@ -15,7 +15,7 @@ const Welcome = () => {
 
   const handleExplore = () => {
     console.log("working here...........");
-    navigate("/Main");
+    navigate("/");
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Welcome = () => {
           <div className="gap-y-4">
             <p className="font-bold text-2xl py-4">Hey, {email} </p>
             <p className="py-4">
-              Congratulations! Your email has been successfully verified
+              Congratulations! Your email has been successfully verified, Click the button below to sign in
             </p>
 
             <div onClick={() => handleExplore()}>
