@@ -1,39 +1,34 @@
 import React, { useEffect, useState } from "react";
-import isAuthenticated from "../Services/Auth";
+import authService from "../Services/Auth.js";
 import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
-  const baseUrl =process.env.REACT_APP_BASEURL
-
-  const getAuthUser = async () => {
-    const response = await fetch(`${baseUrl}/auth/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
-
-    if (!response.ok) {
-      console.log("Error has Occurred");
-    }
-
-    const data = await response.json();
-    setUser(data.data);
-    console.log(data.data)
-  };
 
   useEffect(() => {
-    getAuthUser();
+    const fetchData = async () => {
+      const authenticated = authService.isAuthenticated();
+      if (!authenticated) {
+        navigate("/");
+      } else {
+        try {
+          const user = await authService.getAuthUser();
+          if (!user.profileSetupCompleted) {
+            console.log("User profile", user)
+            navigate(`/SelectUseCase?email=${user.email}`);
+          } else {
+            navigate(`/Main`);
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          navigate("/");
+        }
+      }
+    };
 
-    const authenticated = isAuthenticated.isAuthenticated();
-    console.log("Authenticated", authenticated);
-    if (!authenticated) {
-      navigate("/");
-    }
-  }, []);
+    fetchData();
+  }, [navigate]); // Dependencies for the useEffect hook
 
   return (
     <div className="">

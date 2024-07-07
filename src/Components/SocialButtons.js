@@ -6,11 +6,18 @@ const Google = `${process.env.PUBLIC_URL}/google_logo.jpg`;
 const Apple = `${process.env.PUBLIC_URL}/Apple_Button.png`;
 
 const SocialButtons = ({ isSignIn }) => {
+  const handleGoogleAuth = async () => {
+    window.location.href = "http://localhost:8080/api/v1/auth/google/";
+  };
+
   return (
     <div className="button-toggle-container">
       {isSignIn ? (
         <>
-          <button className="social-button">
+          <button
+            className="social-button"
+            onClick={() => handleGoogleAuth()}
+          >
             <img src={NewGoogle} alt="Google logo" />
           </button>
           <button className="social-button Apple">
@@ -19,7 +26,10 @@ const SocialButtons = ({ isSignIn }) => {
         </>
       ) : (
         <>
-          <button className="social-button">
+          <button
+            className="social-button"
+            onClick={() => handleGoogleAuth()}
+          >
             <img src={Google} alt="Google logo" />
           </button>
           <button className="social-button Apple">
