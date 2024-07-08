@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import SplashScreen from "./SplashScreen.js";
 import Button from "./Button.js";
 import { useLocation } from "react-router-dom";
-import authService from "../Services/Auth.js";
 const Congrats = `${process.env.PUBLIC_URL}/Congrats.png`;
 
 const Welcome = () => {
@@ -14,23 +13,11 @@ const Welcome = () => {
   const queryParams = new URLSearchParams(location.search);
   const email = queryParams.get("email");
 
-<<<<<<< HEAD
   const handleExplore = () => {
     console.log("working here...........");
-    navigate("/Main");
+   
     navigate(`/SelectUseCase?email=${email}`);
 
-=======
-  const handleExplore = async (e) => {
-    e.preventDefault();
-    
-    const newlyuser = await authService.getAuthUser();
-    console.log("working here...........", newlyuser);
-    if (!newlyuser.profileSetupCompleted) {
-      navigate(`/SelectUseCase?email=${email}`);
-    }
-    navigate(`/Main`);
->>>>>>> origin/main
   };
 
   useEffect(() => {
@@ -58,7 +45,7 @@ const Welcome = () => {
               Congratulations! Your email has been successfully verified
             </p>
 
-            <div onClick={(e) => handleExplore(e)}>
+            <div onClick={() => handleExplore()}>
               <Button
                 type="submit"
                 className="bg-purple-900 px-2"
