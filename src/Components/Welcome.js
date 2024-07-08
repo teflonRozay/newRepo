@@ -15,11 +15,9 @@ const Welcome = () => {
 
   const handleExplore = () => {
     console.log("working here...........");
-<<<<<<< HEAD
     navigate("/Main");
-=======
     navigate(`/SelectUseCase?email=${email}`);
->>>>>>> origin/main
+
   };
 
   useEffect(() => {
