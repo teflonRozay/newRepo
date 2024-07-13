@@ -1,0 +1,47 @@
+
+.post-container {
+position: relative;
+background-color: #000;
+}
+
+.media-wrapper {
+position: relative;
+width:80%; /* Adjust the width of the photo container as needed */
+padding-top:100%; /* Aspect ratio of the container */
+background-color: #000;
+overflow:hidden;
+}
+
+.media-content {
+position: absolute;
+top: 50%;
+left: 50%;
+height: 100%;
+width: 100%;
+object-fit: cover;
+transform: translate(-50%, -50%);
+}
+
+.media-content.small {
+object-fit: contain;
+background-color: #000;
+}
+
+.media-content.large {
+object-fit: cover;
+}
+
+.side-buttons {
+position: absolute;
+bottom: 0;
+right: 80px; /* Adjust this value to position the buttons closer to the photo */
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: 10px;
+margin-bottom: auto;
+font-size: 0.75rem;
+font-weight: bold;
+color: #4a5568; /* text-gray-700 */
+width: rem; /* Adjust the width of the buttons container */
+}
