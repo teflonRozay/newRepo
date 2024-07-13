@@ -7,12 +7,15 @@ import Success from "./Success.js";
 import Main from "./Main.js";
 import EmailVerify from "./EmailVerify.js";
 import SelectUseCase from "./SelectUseCase.js";
-
+import LiveUpdate from "./LiveUpdate.js";
 import Welcome from "./Welcome.js";
 import ResetPassword from "./ResetPassword.js";
 import HandleGoogleRedirect from "./HandleGoogleRedirect.js";
 import PasswordUpdate from "./PasswordUpdate.js";
 import PasswordCongrat from "./PasswordCongrat.js";
+import ScheduleForm from './ScheduleForm.js';
+import WebinarDetails from "./WebinarDetails.js";
+import StartLive from "./StartLive.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
@@ -46,6 +49,10 @@ const Details = () => {
         <Route path="/PasswordUpdate/:tempToken" element={<PasswordUpdate />} />
         <Route path="/PasswordCongrat" element={<PasswordCongrat />} />
         <Route path="/SelectUseCase" element={<SelectUseCase />} />
+        <Route path="/LiveUpdate" element={<LiveUpdate/>} />
+        <Route path="/ScheduleForm" element={<ScheduleForm/>} />
+        <Route path="/WebinarDetails" element={<WebinarDetails/>} />
+        <Route path="/StartLive" element={<StartLive/>} />
       </Routes>
     </Router>
   );

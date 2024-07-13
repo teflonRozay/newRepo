@@ -13,6 +13,7 @@ const SignUpForm = ({
   const baseUrl =process.env.REACT_APP_BASEURL
 
   const handleSubmit = async (e) => {
+    console.log('Login')
     e.preventDefault();
 
     try {
