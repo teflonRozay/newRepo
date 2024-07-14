@@ -1,15 +1,15 @@
 import { useEffect, useState, useCallback } from "react";
-import Navbar from "./Navbar";
-import Post from "./Post";
-import SideBar from "./SideBar";
-import Comments from "./Comments";
-import imageBike from "../../assets/imageBike.png";
-import image4 from "../../assets/image4.png";
-import imageCrowd from "../../assets/imageCrowd.png";
-import imageFood from "../../assets/imageFood.png";
-import userpix from "../../assets/userpix.png";
-import Dropdown from "./Dropdown";
-import authService from "../../Services/Auth";
+import Navbar from "../Components/Explore/Navbar";
+import Post from "../Components/Explore/Post";
+import SideBar from "../Components/Explore/SideBar";
+import Comments from "../Components/Explore/Comments";
+import imageBike from "../assets/imageBike.png";
+import image4 from "../assets/image4.png";
+import imageCrowd from "../assets/imageCrowd.png";
+import imageFood from "../assets/imageFood.png";
+import userpix from "../assets/userpix.png";
+import Dropdown from "../Components/Explore/Dropdown";
+import authService from "../Services/Auth";
 
 const MainScreen = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -17,7 +17,6 @@ const MainScreen = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
   const baseUrl = process.env.REACT_APP_BASEURL;
-
 
   const getCurrentUser = useCallback(async () => {
     const response = await fetch(`${baseUrl}/auth/me`, {
@@ -33,7 +32,7 @@ const MainScreen = () => {
     } else {
       console.log("Something went wrong.............");
     }
-  }, [baseUrl, user]); 
+  }, [baseUrl, user]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -44,8 +43,7 @@ const MainScreen = () => {
 
     const authenticated = authService.isAuthenticated();
     !authenticated ? setAuth(false) : setAuth(true);
-  }, [auth]);
-
+  }, [auth, getCurrentUser]);
   const comments = [
     {
       profilePic: userpix,
@@ -65,7 +63,12 @@ const MainScreen = () => {
     <div className="main-content flex flex-row justify-items-center items-start bg-white min-h-screen">
       <SideBar auth={auth} setAuth={setAuth} user={user} />
       <div className="flex flex-col ml-24">
-        <Navbar toggleDropdown={toggleDropdown} auth={auth} setAuth={setAuth} user={user}/>
+        <Navbar
+          toggleDropdown={toggleDropdown}
+          auth={auth}
+          setAuth={setAuth}
+          user={user}
+        />
         <div className="container  ">
           <div className="md:col-span-3 grid grid-cols rounded bg-gray-50 gap-4 pl-10 ">
             <Post
@@ -124,7 +127,6 @@ const MainScreen = () => {
             <Comments comments={comments} />
             {isDropdownOpen && <Dropdown auth={auth} setAuth={setAuth} />}
           </div>
-
         </div>
       </div>
     </div>

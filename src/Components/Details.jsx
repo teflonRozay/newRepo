@@ -4,10 +4,8 @@ import SplashScreen from "./SplashScreen.jsx";
 import AuthForm from "./AuthForm.jsx";
 import ForgotPassword from "./ForgotPassword.jsx";
 import Success from "./Success.jsx";
-import Main from "./Main.jsx";
 import EmailVerify from "./EmailVerify.jsx";
 import SelectUseCase from "./SelectUseCase.jsx";
-import MainCommentSign from "./Explore/MainCommentSign.jsx";
 import MainScreen from "./Explore/MainScreen.jsx";
 
 import TopicSelection from "./Profile/TopicSelection.jsx";
@@ -20,6 +18,7 @@ import ResetPassword from "./ResetPassword.jsx";
 import HandleGoogleRedirect from "./HandleGoogleRedirect.jsx";
 import PasswordUpdate from "./PasswordUpdate.jsx";
 import PasswordCongrat from "./PasswordCongrat.jsx";
+import SubscribeTo from "./SubscribeTo.jsx";
 
 import LiveUpdate from "./Live/LiveUpdate.jsx";
 import ScheduleForm from "./Live/ScheduleForm.jsx";
@@ -52,6 +51,7 @@ const Details = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/SubscribeTo" element={<SubscribeTo />} />
         <Route path="/LiveUpdate" element={<LiveUpdate />} />
         <Route path="/ScheduleForm" element={<ScheduleForm />} />
         <Route path="/StartLive" element={<StartLive />} />
@@ -70,7 +70,6 @@ const Details = () => {
         />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/Success" element={<Success />} />
-        <Route path="/Main" element={<Main />} />
         <Route path="/EmailVerify" element={<EmailVerify />} />
         <Route path="/Welcome" element={<Welcome />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />

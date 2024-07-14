@@ -1,3 +1,4 @@
+import Spinner from "./Spinner";
 import Toastify from "./Toastify";
 import React, { useState } from "react";
 
@@ -11,10 +12,12 @@ const SignUpForm = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
+  const [loading, setLoading] = useState("");
   const baseUrl = process.env.REACT_APP_BASEURL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await fetch(`${baseUrl}/auth/register`, {
@@ -30,12 +33,13 @@ const SignUpForm = ({
 
       const data = await response.json();
       if (response.ok) {
-        console.log("data.message.", data.message);
         setAlert(data.message);
         setTimeout(() => {}, 600);
+        setLoading(false);
         window.location.href = `/Success?email=${email}`;
       } else {
         setAlert(data.message);
+        setLoading(false);
       }
     } catch (error) {
       setAlert(`Error: ${error}`);
@@ -92,16 +96,15 @@ const SignUpForm = ({
             </div>
             <span>Remember Password</span>
           </div>
-          <a
+          <div
             onClick={() => navigate("/ForgotPassword")}
-            style={{ cursor: "pointer" }}
-            className="forgot-password-link"
+            className="forgot-password-link hover:cursor-pointer"
           >
             Forgot Password?
-          </a>
+          </div>
         </div>
         <button type="submit" className="submit-button">
-          Create an Account with Stridez
+          {loading ? <Spinner /> : "Create an Account with Stridez"}
         </button>
       </form>
     </>

@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 .input-no-spinner::-webkit-outer-spin-button,
 .input-no-spinner::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -37,14 +43,15 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: 18rem; /* Adjust the width as needed */
+  width: 20rem; /* Adjust the width as needed */
   background-color: #1f2937; /* Tailwind CSS gray-800 */
   color:#555;
 }
 
 .main-content {
-  margin-left: 18rem; /* Same width as the sidebar */
+  margin-left: 20rem; /* Same width as the sidebar */
 }
+
 
 
 /* src/index.css or src/App.css */

@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import userpix from "../../assets/userpix.png";
 import profilepix from "../../assets/profilepix.png";
 import Socket from "./Socket";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import Toastify from "../Toastify";
 
 const ProfileSetup = () => {

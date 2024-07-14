@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import isAuthenticated from "../Services/Auth";
+import React, { useState } from "react";
 import Toastify from "./Toastify";
+import Spinner from "./Spinner";
 
 const SignInForm = ({
   passwordVisible,
@@ -11,18 +11,13 @@ const SignInForm = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState("");
   const [alert, setAlert] = useState("");
 
   const baseUrl = process.env.REACT_APP_BASEURL;
 
-  // useEffect(() => {
-  //   const authenticated = isAuthenticated.isAuthenticated();
-  //   if (authenticated) {
-  //     window.location.href = "/";
-  //   }
-  // });
-
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     console.log(process.env.NODE_ENV, baseUrl);
     try {
@@ -41,14 +36,11 @@ const SignInForm = ({
 
       if (response.ok) {
         if (data.data.profileSetupCompleted) {
-          console.log(
-            "data.data.profileSetupComplete",
-            data.data.profileSetupCompleted
-          );
           localStorage.setItem("accessToken", data.data.token);
           setAlert("Login Successful");
           setTimeout(() => {
             window.location.href = "/";
+            setLoading(false);
           }, 900);
         } else {
           localStorage.setItem("accessToken", data.data.token);
@@ -68,6 +60,7 @@ const SignInForm = ({
         setAlert(
           String(data.message) || "Invalid email or password. Please try again."
         );
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -121,16 +114,15 @@ const SignInForm = ({
             </div>
             <span>Remember Password</span>
           </div>
-          <a
+          <div
             onClick={() => navigate("/ForgotPassword")}
-            style={{ cursor: "pointer" }}
-            className="forgot-password-link"
+            className="forgot-password-link hover:cursor-pointer"
           >
             Forgot Password?
-          </a>
+          </div>
         </div>
-        <button type="submit" className="submit-button">
-          Sign In with Stridez
+        <button type="submit" className="submit-button ">
+          {loading ? <Spinner /> : "Sign In with Stridez"}
         </button>
       </form>
     </div>

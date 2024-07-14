@@ -20,14 +20,14 @@ const WebinarDetails = () => {
 
   return (
     <div>
-      <h1>{formData.webinarTitle}</h1>
-      <p>{formData.description}</p>
-      <p>Date: {formData.selectedDate.toString()}</p>
-      <p>Start Time: {formData.startTime.label}</p>
-      <p>End Time: {formData.endTime.label}</p>
-      <p>Timezone: {formData.selectedTimezone.label}</p>
-      <p>Guest: {formData.guestEmail}</p>
-      <p>Co-Guest: {formData.coGuestEmail}</p>
+      <h1>{formData?.webinarTitle}</h1>
+      <p>{formData?.description}</p>
+      <p>Date: {formData?.selectedDate.toString()}</p>
+      <p>Start Time: {formData?.startTime.label}</p>
+      <p>End Time: {formData?.endTime.label}</p>
+      <p>Timezone: {formData?.selectedTimezone.label}</p>
+      <p>Guest: {formData?.guestEmail}</p>
+      <p>Co-Guest: {formData?.coGuestEmail}</p>
       {isLive() ? (
         <Link to="/live-page">Join Live Event</Link>
       ) : (

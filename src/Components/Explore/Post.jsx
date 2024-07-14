@@ -26,10 +26,13 @@ const Post = ({
 }) => {
   const [mediaClass, setMediaClass] = useState("media-content");
   const [shareOptions, setShareOptions] = useState(false);
-  const handleShareClick = () => {
-    setShareOptions(!shareOptions);
-  };
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const handleShareMouseEnter = () => {
+    setShareOptions(true);
+  };
+  const handleShareMouseLeave = () => {
+    setShareOptions(false);
+  };
 
   const handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
@@ -52,7 +55,21 @@ const Post = ({
     { icon: comment, value: comments, alt: "comments" },
     { icon: uncollect, value: pin, alt: "pinned" },
     { icon: eyefilled, value: views, alt: "views" },
-    { icon: share, value: shares, alt: "share" },
+    {
+      icon: share,
+      value: shares,
+      alt: "share",
+      onMouseEnter: handleShareMouseEnter,
+      onMouseLeave: handleShareMouseLeave,
+    },
+  ];
+
+  const shareOptionsMenu = [
+    { icon: link, alt: "Copy link", text: "Copy link" },
+    { icon: whatsapp, alt: "WhatsApp", text: "Share to WhatsApp" },
+    { icon: telegram, alt: "Telegram", text: "Share to Telegram" },
+    { icon: SocialX, alt: "Facebook", text: "Share to Facebook" },
+    { icon: SocialX, alt: "Twitter", text: "Share to Twitter" },
   ];
 
   return (
@@ -88,57 +105,33 @@ const Post = ({
       </div>
 
       <div className="side-buttons flex flex-col items-end text-gray-700 font-bold text-xs spacing-y-1">
-        {postSideMenu &&
-          postSideMenu.map((menu) => {
-            return menu.value !== "share" ? (
-              <div className="flex flex-col mb-6">
-                <img
-                  src={menu.icon}
-                  alt={menu.alt}
-                  className="w-6 h-6 mr-1 mb-2"
-                />
-                {menu.value}
-              </div>
-            ) : (
-              <div className="flex flex-col mb-6">
-                <img
-                  src={menu.icon}
-                  alt={menu.alt}
-                  className="w-6 h-6 mr-1 mb-2"
-                  onClick={handleShareClick}
-                />
-                {menu.value}
-                {shareOptions && (
-                  <div className="absolute bottom-20 left-0 text-xs font-normal bg-gray-50 shadow-md rounded pr-8 space-y-2">
-                    <div className="flex items-center space-x-3">
-                      <img
-                        src={link}
-                        alt="copylink"
-                        className="w-4 h-4 hover:bg-purple-200"
-                      />
-                      <span className="text-nowrap">Copy link</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <img src={whatsapp} alt="WhatsApp" className="w-4 h-4" />
-                      <span className="text-nowrap">Share to WhatsApp</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <img src={telegram} alt="Telegram" className="w-4 h-4" />
-                      <span className="text-nowrap">Share to Telegram</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <img src={SocialX} alt="Facebook" className="w-4 h-4" />
-                      <span className="text-nowrap">Share to Facebook</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <img src={SocialX} alt="Twitter" className="w-4 h-4" />
-                      <span className="text-nowrap">Share to Twitter</span>
-                    </div>
+        {postSideMenu.map((menu, index) => (
+          <div
+            className="flex flex-col mb-6 cursor-pointer relative items-center"
+            key={index}
+            onMouseEnter={menu.onMouseEnter}
+            onMouseLeave={menu.onMouseLeave}
+          >
+            <div className="shadow rounded-full p-2 mb-2">
+              <img src={menu.icon} alt={menu.alt} className="w-6 h-6" />
+            </div>
+            {menu.value}
+            {menu.alt === "share" && shareOptions && (
+              <div className="share-options text-xs font-normal bg-gray-50 shadow-md rounded p-4 space-y-2">
+                {shareOptionsMenu.map((option, i) => (
+                  <div key={i} className="flex items-center space-x-3">
+                    <img
+                      src={option.icon}
+                      alt={option.alt}
+                      className="w-4 h-4 hover:bg-purple-200"
+                    />
+                    <span className="text-nowrap">{option.text}</span>
                   </div>
-                )}
+                ))}
               </div>
-            );
-          })}
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
