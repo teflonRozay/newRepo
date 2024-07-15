@@ -10,9 +10,7 @@ import SocialButtons from "./SocialButtons.jsx";
 import SignInForm from "./SignInForm.jsx";
 import SignUpForm from "./SignUpForm.jsx";
 
-
 const Logo = `${process.env.PUBLIC_URL}/logo.png`;
-
 
 const AuthForm = () => {
   const navigate = useNavigate();
@@ -29,11 +27,16 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="auth-container">
+    <div className="h-screen flex flex-col w-[770px] justify-center items-center ml-auto bg-white">
       <HeaderImage src={Logo} />
       <ExploreAuth isSignIn={isSignIn} setIsSignIn={setIsSignIn} />
       <SocialButtons isSignIn={isSignIn} />
-      <div className="form-container">
+      <div className="flex items-center gap-x-4 ">
+        <div className="bg-gray-600 h-[0.1rem] w-36 ml-auto"></div>
+        OR
+        <div className="bg-gray-600 h-[0.1rem] w-36"></div>
+      </div>
+      <div className="flex flex-col  items-center ">
         {isSignIn ? (
           <SignInForm
             passwordVisible={passwordVisible}

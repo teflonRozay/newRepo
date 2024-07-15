@@ -71,7 +71,7 @@ const SignInForm = ({
   return (
     <div>
       <Toastify message={alert} />
-      <form className="auth-form" onSubmit={handleSubmit}>
+      <form className=" flex flex-col  justify-center" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <div className="input-container">
           <i className="fas fa-envelope input-icon"></i>

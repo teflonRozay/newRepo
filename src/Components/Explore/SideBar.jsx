@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SVG1 from "../../assets/icons/SVG1.svg";
 import SVG from "../../assets/icons/SVG.svg";
@@ -14,16 +14,19 @@ import Divider from "../../assets/Divider.png";
 import authService from "../../Services/Auth";
 import { useNavigate } from "react-router-dom";
 import Toastify from "../Toastify";
+import Spinner from "../Spinner";
 
 const Sidebar = ({ auth, setAuth, user }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const [alert, setAlert] = useState("");
 
   const handleLogout = () => {
     if (auth) {
       authService.logout();
-      setAuth(false);
       setAlert("Logged out Successfully");
+      setAuth(false);
+      navigate("/");
     } else {
       navigate("/Auth");
     }
@@ -34,22 +37,28 @@ const Sidebar = ({ auth, setAuth, user }) => {
   };
 
   const learnersAndExplorerMenuItems = [
-    { title: "Explore For You", icon: SVG1, tag: "", link: "" },
+    { title: "Explore For You", icon: SVG1, tag: "", link: "/" },
     { title: "Following", icon: SVG, tag: "New" },
     { title: "Subscribe to", icon: userIcon, tag: "", link: "/SubscribeTo" },
-    { title: "LIVE", icon: video, tag: "", link: "/StartLive" },
+    { title: "LIVE", icon: video, tag: "", link: "/Live" },
     { title: "Profile", icon: personicon, tag: "", link: "" },
   ];
 
   const guidesMenuItems = [
-    { title: "LIVE", icon: video, tag: "", link: "/StartLive" },
+    { title: "LIVE", icon: video, tag: "", link: "/Live" },
     { title: "Upload Video", icon: uploadVideo, tag: "", link: "" },
     { title: "Calender", icon: Calender, tag: "", link: "" },
     { title: "Course Management", icon: courseManagement, tag: "", link: "" },
     { title: "Analytics", icon: analytics, tag: "", link: "" },
-    { title: "Explore For You", icon: SVG1, tag: "", link: "" },
+    { title: "Explore For You", icon: SVG1, tag: "", link: "/" },
     { title: "Profile", icon: personicon, tag: "", link: "" },
   ];
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  });
 
   return (
     <>
@@ -62,51 +71,57 @@ const Sidebar = ({ auth, setAuth, user }) => {
 
           <ul className="mt-2 ">
             <div className="gap-y-2 ">
-              {auth && user && user.role === "creator" && guidesMenuItems
-                ? guidesMenuItems.map((item, index) => {
-                    return (
-                      <li
-                        onClick={() => handleNav(item.link)}
-                        className="py-2 flex items-center rounded-lg hover:text-purple-700 hover:bg-gray-100  p-2 hover:cursor-pointer h-12 "
-                        key={index}
-                      >
-                        <img src={item.icon} alt="" className="mr-2" />
+              {loading ? (
+                <div className="flex items-center justify-center pt-10">
+                  <Spinner className={"text-purple-600"} />
+                </div>
+              ) : auth && user && user.role === "creator" && guidesMenuItems ? (
+                guidesMenuItems.map((item, index) => {
+                  return (
+                    <li
+                      onClick={() => handleNav(item.link)}
+                      className="py-2 flex items-center rounded-lg hover:text-purple-700 hover:bg-gray-100  p-2 hover:cursor-pointer h-12 "
+                      key={index}
+                    >
+                      <img src={item.icon} alt="" className="mr-2" />
 
-                        <Link to={item.link} className="ml-2 ">
-                          <span>{item.title}</span>
-                        </Link>
-                        {item.tag ? (
-                          <span className="ml-auto text-sm bg-blue-100 text-blue-900 rounded-full px-2 py-0.5">
-                            {item.tag}
-                          </span>
-                        ) : (
-                          ""
-                        )}
-                      </li>
-                    );
-                  })
-                : learnersAndExplorerMenuItems.map((item, index) => {
-                    return (
-                      <li
-                        onClick={() => handleNav(item.link)}
-                        className="py-2 flex items-center rounded-lg hover:text-purple-700 hover:bg-gray-100  p-2 hover:cursor-pointer h-12 "
-                        key={index}
-                      >
-                        <img src={item.icon} alt="" className="mr-2" />
+                      <Link to={item.link} className="ml-2 ">
+                        <span>{item.title}</span>
+                      </Link>
+                      {item.tag ? (
+                        <span className="ml-auto text-sm bg-blue-100 text-blue-900 rounded-full px-2 py-0.5">
+                          {item.tag}
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </li>
+                  );
+                })
+              ) : (
+                learnersAndExplorerMenuItems.map((item, index) => {
+                  return (
+                    <li
+                      onClick={() => handleNav(item.link)}
+                      className="py-2 flex items-center rounded-lg hover:text-purple-700 hover:bg-gray-100  p-2 hover:cursor-pointer h-12 "
+                      key={index}
+                    >
+                      <img src={item.icon} alt="" className="mr-2" />
 
-                        <Link to={item.link} className="ml-2 ">
-                          <span>{item.title}</span>
-                        </Link>
-                        {item.tag ? (
-                          <span className="ml-auto text-sm bg-blue-100 text-blue-900 rounded-full px-2 py-0.5">
-                            {item.tag}
-                          </span>
-                        ) : (
-                          ""
-                        )}
-                      </li>
-                    );
-                  })}
+                      <Link to={item.link} className="ml-2 ">
+                        <span>{item.title}</span>
+                      </Link>
+                      {item.tag ? (
+                        <span className="ml-auto text-sm bg-blue-100 text-blue-900 rounded-full px-2 py-0.5">
+                          {item.tag}
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </li>
+                  );
+                })
+              )}
             </div>
           </ul>
         </div>

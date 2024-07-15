@@ -22,7 +22,7 @@ import SubscribeTo from "./SubscribeTo.jsx";
 
 import LiveUpdate from "./Live/LiveUpdate.jsx";
 import ScheduleForm from "./Live/ScheduleForm.jsx";
-import StartLive from "./Live/StartLive.jsx";
+import Live from "./Live/Live.jsx";
 import WebinarDetails from "./Live/WebinarDetails.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -52,9 +52,9 @@ const Details = () => {
     <Router>
       <Routes>
         <Route path="/SubscribeTo" element={<SubscribeTo />} />
+        <Route path="/Live" element={<Live />} />
         <Route path="/LiveUpdate" element={<LiveUpdate />} />
         <Route path="/ScheduleForm" element={<ScheduleForm />} />
-        <Route path="/StartLive" element={<StartLive />} />
         <Route path="/WebinarDetails" element={<WebinarDetails />} />
 
         <Route path="/" element={<MainScreen />} />
