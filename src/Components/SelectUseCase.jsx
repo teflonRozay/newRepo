@@ -1,17 +1,30 @@
+<<<<<<< HEAD:src/Components/SelectUseCase.jsx
 import React, { useEffect, useState } from "react";
 import isAuthenticated from "../Services/Auth.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 import Button from "./Button.jsx";
 const SelectUseCase = `${process.env.PUBLIC_URL}/SelectUseCase.jpg`;
+=======
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import '../styles/SelectUseCase.css';
+import Logo from '../assets/logo.png';
+import Live from '../assets/Live.png';
+import AuthIcons from '../assets/AuthIcons.png';
+import Analytics from '../assets/Analytics.png';
+import Calendar from '../assets/Calendar.png';
+import CourseManage from '../assets/CourseManage.png';
+import ExploreFor from '../assets/ExploreFor.png';
+import HorizontalDivider from '../assets/HorizontalDivider.png';
+import Notification from '../assets/Notification.png';
+import Profile from '../assets/Profile.png';
+import UploadVideo from '../assets/UploadVideo.png';
+>>>>>>> eabe8b6d5cb609d6eadcf2c3e1aa6a6585635de0:src/Components/SelectUseCase.js
 
-const Welcome = () => {
-  const [role, setRole] = useState("");
-  const [error, setError] = useState(null);
+const SelectUseCase = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const email = queryParams.get("email");
 
+<<<<<<< HEAD:src/Components/SelectUseCase.jsx
   const roles = [
     { title: "creator", desc: "I'm a creator" },
     { title: "learner", desc: "I'm a learner" },
@@ -31,17 +44,15 @@ const Welcome = () => {
         ? navigate(`/LearnerProfile?role=${role}`)
         : navigate(`/GuideProfile?role=${role}`);
     }
+=======
+  const handleLiveNowClick = () => {
+    navigate('/LiveUpdate');
+>>>>>>> eabe8b6d5cb609d6eadcf2c3e1aa6a6585635de0:src/Components/SelectUseCase.js
   };
-
-  useEffect(() => {
-    const authenticated = isAuthenticated.isAuthenticated();
-    if (!authenticated) {
-      navigate("/");
-    }
-  }, [navigate]);
 
   return (
     <div>
+<<<<<<< HEAD:src/Components/SelectUseCase.jsx
       <div className="flex">
         <div className="flex w-[40%] relative">
           <div className="ml-6 relative rounded-lg border ">
@@ -96,10 +107,29 @@ const Welcome = () => {
             {/* Display error message */}
             {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
+=======
+      <div className='head'>
+        <img src={Logo} alt="Logo" />
+        <div className='input-container'>
+          <input placeholder="search" />
+          <img src={AuthIcons} alt="Auth Icons" className="icon" />
+>>>>>>> eabe8b6d5cb609d6eadcf2c3e1aa6a6585635de0:src/Components/SelectUseCase.js
         </div>
+        <img src={Notification} alt="Notification" />
+      </div>
+      
+      <div className="part">
+        <img src={Live} alt="Live" onClick={handleLiveNowClick} />
+        <img src={UploadVideo} alt="UploadVideo" />
+        <img src={Calendar} alt="Calendar" />
+        <img src={CourseManage} alt="Course Manage" />
+        <img src={Analytics} alt="Analytics" />
+        <img src={ExploreFor} alt="Explore For" />
+        <img src={Profile} alt="Profile" />
+        <img src={HorizontalDivider} alt="Horizontal Divider" />
       </div>
     </div>
   );
 };
 
-export default Welcome;
+export default SelectUseCase;

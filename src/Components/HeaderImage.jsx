@@ -7,3 +7,4 @@ const HeaderImage = ({ src }) => {
 };
 
 export default HeaderImage;
+

@@ -14,9 +14,13 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.1",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
     "react-toastify": "4.1",
     "react-websocket": "^2.1.0",
     "simple-peer": "^9.11.1",
+=======
+    "react-select": "^5.8.0",
+>>>>>>> eabe8b6d5cb609d6eadcf2c3e1aa6a6585635de0
     "socket.io-client": "^4.7.5",
     "web-vitals": "^2.1.4"
   },
