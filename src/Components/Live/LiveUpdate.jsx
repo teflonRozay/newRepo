@@ -65,4 +65,4 @@ const LiveUpdate = () => {
   );
 };
 
-export default LiveUpdate;
+export default LiveUpdate; 

@@ -39,3 +39,44 @@ input + img {
  margin-right: 320px;
 
 }
+
+
+/* LiveUpdate.css */
+.button-group {
+  position: relative;
+}
+
+.button {
+  position: relative;
+  flex: 1;
+  padding: 0.5rem;
+  background-color: #e5e7eb; /* Gray 300 */
+  border: 1px solid #d1d5db; /* Gray 400 */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button.active {
+  background-color: #d1d5db; /* Blue 500 */
+  color: white;
+}
+
+.button-group::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: #D5D4FF;
+
+  transition: transform 0.3s ease;
+  transform: translateX(calc(50% * var(--active-mode)));
+}
+
+.button-group .button:first-child.active ~ .button-group::before {
+  transform: translateX(0);
+}
+
+.button-group .button:last-child.active ~ .button-group::before {
+  transform: translateX(50%);
+}

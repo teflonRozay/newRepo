@@ -24,6 +24,8 @@ import LiveUpdate from "./Live/LiveUpdate.jsx";
 import ScheduleForm from "./Live/ScheduleForm.jsx";
 import Live from "./Live/Live.jsx";
 import WebinarDetails from "./Live/WebinarDetails.jsx";
+import StartLive from "./Live/StartLive.jsx";
+import StartWebinar from "./Live/StartWebinar.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -56,6 +58,8 @@ const Details = () => {
         <Route path="/LiveUpdate" element={<LiveUpdate />} />
         <Route path="/ScheduleForm" element={<ScheduleForm />} />
         <Route path="/WebinarDetails" element={<WebinarDetails />} />
+        <Route path="/StartLive" element={<StartLive />} />
+        <Route path="/StartWebinar" element={<StartWebinar />} />
 
         <Route path="/" element={<MainScreen />} />
         <Route path="/DeleteUser" element={<DeleteUser />} />
